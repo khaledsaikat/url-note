@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.khaledsaikat.urlnote.model.UrlNote;
 import com.khaledsaikat.urlnote.repository.NoteRepository;
 import com.khaledsaikat.urlnote.repository.UrlRepository;
 
+@CrossOrigin
 @RestController
 public class MainController {
 
@@ -32,7 +34,7 @@ public class MainController {
 		return urlRepository.findAll();
 	}
 
-	@GetMapping("/notes")
+	@GetMapping("/get-notes")
 	public Iterable<Note> getNotesByUrl(@Valid @RequestParam("url") String urlString) {
 		Url url = urlRepository.findByUrl(new UrlNote(urlString).getUrl());
 		if (url == null) {
@@ -52,7 +54,7 @@ public class MainController {
 		return urlRepository.save(url);
 	}
 
-	@PostMapping("/add")
+	@PostMapping("/add-note")
 	public Note addUrlNote(@Valid @RequestBody UrlNote urlNote) {
 		Url url = null;
 		url = urlRepository.findByUrl(urlNote.getUrl());

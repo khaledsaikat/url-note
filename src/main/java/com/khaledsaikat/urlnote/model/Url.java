@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Url {
+public class Url extends AuditModel {
 
 	@Id
 	@GeneratedValue

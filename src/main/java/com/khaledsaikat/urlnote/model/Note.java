@@ -11,7 +11,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-public class Note {
+public class Note extends AuditModel {
 
 	@Id
 	@GeneratedValue
