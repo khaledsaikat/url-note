@@ -1,5 +1,7 @@
 package com.khaledsaikat.urlnote.model;
 
+import org.springframework.web.util.UriUtils;
+
 public class UrlNote {
 
 	private String url;
@@ -29,7 +31,7 @@ public class UrlNote {
 	 * @return String
 	 */
 	private String cleanupUrl(String url) {
-		return url.split("\\?")[0];
+		return UriUtils.decode(url.split("\\?")[0], "UTF-8");
 	}
 
 	public void setUrl(String url) {
