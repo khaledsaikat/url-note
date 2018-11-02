@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            form {
+                width: 200px;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <form method="POST">
+            <div>
+                <input type="radio" name="status" id="applied" value="applied" checked />
+                <label for="applied">Applied</label>
+            </div>
+
+            <div>
+                <input type="radio" name="status" id="cant_apply" value="cant_apply" />
+                <label for="cant_apply">Can't Apply</label>
+            </div>
+
+            <div>
+                <input type="radio" name="status" id="rejected" value="rejected" />
+                <label for="rejected">Rejected</label>
+            </div>
+
+            <div>
+                    <input type="radio" name="status" id="interview_call" value="interview_call" />
+                    <label for="interview_call">Got interview call</label>
+            </div>
+
+            <div>
+                <label>
+                    <input type="radio" name="status" value="got_message" />
+                    Got Message
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <input type="radio" name="status" value="note" />
+                    Take Note
+                </label>
+            </div>
+
+            <p>
+                <input type="text" name="note" id="note" value="" placeholder="Note..." />
+            </p>
+
+            <p>
+                <button type="button" id="save_button">Save</button>
+            </p>
+
+            <div id="result"></div>
+
+        </form>
+        <script src="popup.js"></script>
+    </body>
+</html>
