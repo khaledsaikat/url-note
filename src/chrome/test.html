@@ -1,0 +1,63 @@
+<script>
+
+"use strict";
+
+let data = {
+	"title": "Title",
+	"url": "https://stackoverflow.com/jobs/206931/senior-php"
+}
+
+const noteAddUrl = "http://localhost:82/add-note"
+
+fetch(noteAddUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        }
+        //body: JSON.stringify(data)
+    })
+    .then(response => {
+        console.log("then")
+        console.log(response)
+		if (!response.ok) {
+			throw 'some error'
+			//throw Error(`${response.status} ${response.statusText}`)
+		}
+
+    })
+    .catch(error => {
+        console.log("error")
+        console.log(error)
+		console.error(error)
+    })
+
+
+/*fetch("https://randomuser.me/api/?results=2")
+.then(response => {
+    console.log(response)
+})
+.catch(error => {
+    console.error(error)
+})*/
+
+
+/*
+const url = 'http://localhost:82';
+
+fetch(url)
+  .then(function(data) {
+      console.log(data)
+      return data.json()
+    // Here you get the data to modify as you please
+  })
+  .catch(function(error) {
+    // If there is any error you will catch them here
+  })
+  .then(function(data) {
+      console.log(data)
+    // Here you get the data to modify as you please
+})*/
+
+
+
+</script>

@@ -33,12 +33,16 @@ public class MainController {
 		return urlRepository.findAll();
 	}
 
+	/**
+	 * Get notes by providing URL as query string
+	 * 
+	 * @param urlString
+	 * @return Iterable<Note>
+	 */
 	@GetMapping("/get-notes")
 	public Iterable<Note> getNotesByUrl(@Valid @RequestParam("url") String urlString) {
-		Url url = urlRepository.findByUrl(new UrlNote(urlString).getUrl());
-		if (url == null) {
-			return null;
-		}
+		Url url = urlRepository.findByUrl(new UrlNote(urlString).getUrl())
+				.orElseThrow(() -> new ResourceNotFoundException("URL"));
 
 		return noteRepository.findByUrl(url);
 	}
@@ -55,18 +59,13 @@ public class MainController {
 
 	@PostMapping("/add-note")
 	public Note addUrlNote(@Valid @RequestBody UrlNote urlNote) {
-		Url url = null;
-		url = urlRepository.findByUrl(urlNote.getUrl());
-		if (url == null) {
-			url = new Url(urlNote.getUrl(), urlNote.getTitle());
-		}
-
+		Url url = urlRepository.findByUrl(urlNote.getUrl()).orElse(new Url(urlNote.getUrl(), urlNote.getTitle()));
 		Note note = new Note();
 		note.setUrl(url);
 		note.setStatus(urlNote.getStatus());
 		note.setNote(urlNote.getNote());
-
 		urlRepository.save(url);
+
 		return noteRepository.save(note);
 	}
 
