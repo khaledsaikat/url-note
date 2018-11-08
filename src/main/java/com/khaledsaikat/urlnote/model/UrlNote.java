@@ -1,5 +1,7 @@
 package com.khaledsaikat.urlnote.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.web.util.UriUtils;
 
 public class UrlNote {
@@ -60,5 +62,15 @@ public class UrlNote {
 
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+				.append("url", url)
+				.append("title", title)
+				.append("status", status)
+				.append("note", note)
+				.toString();
 	}
 }

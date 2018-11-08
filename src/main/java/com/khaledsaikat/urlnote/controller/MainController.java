@@ -49,7 +49,8 @@ public class MainController {
 
 	@GetMapping("/urls/{urlId}")
 	public Url getUrlsById(@PathVariable(value = "urlId") Long urlId) {
-		return urlRepository.findById(urlId).orElseThrow(() -> new ResourceNotFoundException("URL"));
+		return urlRepository.findById(urlId)
+				.orElseThrow(() -> new ResourceNotFoundException("URL"));
 	}
 
 	@PostMapping("/create-url")
@@ -59,7 +60,8 @@ public class MainController {
 
 	@PostMapping("/add-note")
 	public Note addUrlNote(@Valid @RequestBody UrlNote urlNote) {
-		Url url = urlRepository.findByUrl(urlNote.getUrl()).orElse(new Url(urlNote.getUrl(), urlNote.getTitle()));
+		Url url = urlRepository.findByUrl(urlNote.getUrl())
+				.orElse(new Url(urlNote.getUrl(), urlNote.getTitle()));
 		Note note = new Note();
 		note.setUrl(url);
 		note.setStatus(urlNote.getStatus());

@@ -32,7 +32,9 @@ public class MainControllerTests {
 
 	@Test
 	public void indexPageReturnsJson() throws Exception {
-		this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(get("/"))
+				.andDo(print())
+				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
 	}
 
@@ -43,11 +45,13 @@ public class MainControllerTests {
 		jsonData.put("title", "TITLE");
 		jsonData.put("status", "STATUS");
 		jsonData.put("note", "NOTE");
-
-		MockHttpServletRequestBuilder requestBuilder = post("/add-note").contentType(MediaType.APPLICATION_JSON)
+		MockHttpServletRequestBuilder requestBuilder = post("/add-note")
+				.contentType(MediaType.APPLICATION_JSON)
 				.content(jsonData.toString());
 
-		this.mockMvc.perform(requestBuilder).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(requestBuilder)
+				.andDo(print())
+				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(jsonPath("$.createdAt", isA(String.class)))
 				.andExpect(jsonPath("$.status", is(jsonData.get("status"))))
