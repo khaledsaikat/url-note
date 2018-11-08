@@ -1,7 +1,5 @@
 package com.khaledsaikat.urlnote.controller;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.khaledsaikat.urlnote.exception.ResourceNotFoundException;
 import com.khaledsaikat.urlnote.model.Note;
 import com.khaledsaikat.urlnote.model.Url;
 import com.khaledsaikat.urlnote.model.UrlNote;
@@ -45,8 +44,8 @@ public class MainController {
 	}
 
 	@GetMapping("/urls/{urlId}")
-	public Optional<Url> getUrlsById(@PathVariable(value = "urlId") Long urlId) {
-		return urlRepository.findById(urlId);
+	public Url getUrlsById(@PathVariable(value = "urlId") Long urlId) {
+		return urlRepository.findById(urlId).orElseThrow(() -> new ResourceNotFoundException("URL"));
 	}
 
 	@PostMapping("/create-url")
