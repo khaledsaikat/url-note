@@ -5,13 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-public class Note extends AuditModel {
+public class NoteLog extends AuditModel {
 
 	@Id
 	@GeneratedValue
@@ -22,12 +22,12 @@ public class Note extends AuditModel {
 
 	private String note;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "url_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Url url;
 
-	public Note() {
+	public NoteLog() {
 
 	}
 
