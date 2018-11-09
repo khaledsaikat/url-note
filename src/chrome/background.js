@@ -6,17 +6,20 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     if (changeInfo.status == 'complete' && tab.active) {
         let url = apiUrl + "?url=" + tab.url;
         fetch(url)
-            .then(response => response.json())
-            .catch(error => console.log(error))
-            .then(jsonResponse => {
-                console.log(jsonResponse)
-
+            .then(response => {
+                if (!response.ok) {
+                    throw response.statusText
+                }
+                return response.json()
+            })
+            .then(response => {
                 var result = ""
-                jsonResponse.forEach(note => {
+                response.forEach(note => {
                     result += `\n${note.status} ${note.note}`
                 });
 
                 alert(result)
-            });
+            })
+            .catch(error => console.log(error))
     }
 });

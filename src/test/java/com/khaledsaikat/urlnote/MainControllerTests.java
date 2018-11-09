@@ -38,7 +38,7 @@ public class MainControllerTests {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
 	}
 
-	// @Test
+	@Test
 	public void addNoteWithAllRequiredFields() throws Exception {
 		JSONObject urlNoteData = new JSONObject();
 		urlNoteData.put("url", "URL");
